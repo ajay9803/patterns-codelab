@@ -27,4 +27,11 @@ const documentJson = '''
 class Document {
   final Map<String, Object?> _json;
   Document() : _json = jsonDecode(documentJson);
+
+  // record - getter
+  // access un-named field with metaData.$1
+  // access named filed with metaData.date
+  (String, {DateTime date}) get metaData {
+    return ("My Document", date: DateTime.now());
+  }
 }
