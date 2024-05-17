@@ -31,7 +31,17 @@ class Document {
   // record - getter
   // access un-named field with metaData.$1
   // access named filed with metaData.date
-  (String, {DateTime date}) get metaData {
-    return ("My Document", date: DateTime.now());
+  (String, {DateTime modified}) get metaData {
+    if (_json
+        case {
+          "metadata": {
+            "title": String title,
+            "modified": String modified,
+          }
+        }) {
+      return (title, modified: DateTime.parse(modified));
+    } else {
+      throw const FormatException("Unexpected JSON");
+    }
   }
 }
